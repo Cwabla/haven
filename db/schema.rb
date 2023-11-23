@@ -151,9 +151,19 @@ ActiveRecord::Schema.define(version: 2023_11_20_232234) do
     t.boolean "show_post_date", default: false
   end
 
-  create_table "users", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table "users", id: :serial, force: :cascade do |t|
+    t.string "email", limit: 255
+    t.string "encrypted_password", limit: 255
+    t.string "reset_password_token", limit: 255
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }
+    t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }
+    t.string "name", limit: 255
+    t.boolean "admin"
+    t.string "basic_auth_username", limit: 255
+    t.string "basic_auth_password", limit: 255
+    t.string "image_password", limit: 255
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
